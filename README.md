@@ -1,1 +1,0 @@
-# Yapay Zeka Uygulamaları
