@@ -1,4 +1,4 @@
-# LangChain Vector Store & RAG (Gemini)
+# LangChain Vector Store & RAG
 
 Bu proje, LangChain ile bir **vector store** (vektör veritabanı) kurmayı ve bunun üzerine basit bir **RAG** (Retrieval-Augmented Generation) sistemi inşa etmeyi gösteriyor. Embedding ve chat modeli olarak Google Gemini kullanılıyor.
 
@@ -7,6 +7,17 @@ Bu proje, LangChain ile bir **vector store** (vektör veritabanı) kurmayı ve b
 - **Embedding**: Bir metni, anlamını temsil eden sayısal bir vektöre çevirme işlemi. Anlamca yakın metinler, vektör uzayında birbirine yakın konumlanır.
 - **Vector Store**: Bu vektörleri saklayıp "bu sorguya en yakın olanları bul" diyebileceğin bir veritabanı (burada [Chroma](https://www.trychroma.com/) kullanılıyor).
 - **RAG (Retrieval-Augmented Generation)**: Modelin cevap üretirken kendi genel bilgisi yerine, vector store'dan çekilen ilgili dokümanları context olarak kullanmasını sağlayan yöntem — model, verilen bilginin dışına çıkmadan cevap verir.
+
+## Chroma nasıl çalışıyor?
+
+Chroma için ayrı bir sunucu kurmadık, sadece `pip install` yeterliydi — çünkü kodda Chroma **embedded/in-memory** modda çalışıyor: PostgreSQL gibi ayrı bir server process'i değil, doğrudan Python programının içinde çalışan bir kütüphane (SQLite'a benzer bir mantık). `persist_directory` vermediğimiz için veriler sadece bellekte tutuluyor, script bitince kayboluyor — her çalıştırmada dokümanlar sıfırdan yeniden embed'leniyor.
+
+Kalıcılık istenirse (yine server kurmadan, sadece dosyaya yazarak):
+```python
+vectorstore = Chroma.from_documents(documents, embedding=embeddings, persist_directory="./chroma_db")
+```
+
+Chroma'nın ayrıca `chroma run` ile ayrı bir sunucu olarak başlatılabildiği bir client-server modu da var (birden fazla uygulamanın aynı vector store'u paylaşması gerektiğinde kullanılır), ama bu projede buna ihtiyaç yok.
 
 ## Dosyalar
 
