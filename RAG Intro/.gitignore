@@ -1,0 +1,16 @@
+# Çevre değişkenleri ve API anahtarları
+.env
+.env.*
+!.env.example
+
+# Sanal ortamlar (venv)
+venv/
+.venv/
+env/
+
+# PyCharm / JetBrains ayarları
+.idea/
+
+# Python derleme ve önbellek dosyaları (mutlaka eklenmeli)
+__pycache__/
+*.py[cod]
