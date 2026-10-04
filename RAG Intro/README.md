@@ -1,4 +1,4 @@
-# RAG Intro — Bir Web Sayfası Üzerinde Soru-Cevap (Gemini)
+# RAG Intro — Bir Web Sayfası Üzerinde Soru-Cevap
 
 Bu proje, LangChain ile baştan sona çalışan basit bir **RAG** (Retrieval-Augmented Generation) uygulaması kuruyor: bir blog yazısını internetten indiriyor, parçalara bölüp vector store'a kaydediyor ve kullanıcının sorusunu **sadece o yazıdaki bilgiye dayanarak** cevaplıyor. Embedding ve chat modeli olarak Google Gemini kullanılıyor.
 
