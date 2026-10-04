@@ -54,7 +54,17 @@ vectorstore = Chroma.from_documents(
 retriever = vectorstore.as_retriever()
 
 # RAG prompt'u: modele sadece verilen context'e dayanarak, kısa cevap vermesini söylüyoruz.
-# (LangChain Hub'da bu tarz hazır RAG prompt'ları da var; burada aynı yapıyı elle yazıyoruz.)
+# Burada prompt'u elle yazdık. Aynısı LangChain Hub'da hazır duruyor ("rlm/rag-prompt");
+# Hub'dan çekmek istersek güncel yol LangSmith SDK'sı:
+#
+#   from langsmith import Client
+#   prompt = Client().pull_prompt("rlm/rag-prompt")
+#
+# Eski yol (`from langchain import hub` + `hub.pull(...)`) artık önerilmiyor: langchainhub
+# deprecated, `hub` modülü de `langchain_classic` altına taşınıp deprecated oldu.
+# Hub çağrısı LangSmith'e gittiği için LANGCHAIN_API_KEY (ve EU hesaplarında doğru
+# LANGCHAIN_ENDPOINT) gerekebilir. Hazır prompt da {context} ve {question} değişkenlerini
+# kullandığı için zincirin geri kalanı değişmeden çalışır.
 prompt = ChatPromptTemplate.from_messages(
     [
         (
